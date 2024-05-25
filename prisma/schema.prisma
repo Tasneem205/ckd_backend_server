@@ -44,11 +44,11 @@ model blackList {
 model DailyProgress {
   ProregressID Int      @id @default(autoincrement())
   PatientID    Int
-  ProgressDate DateTime // TODO:
+  ProgressDate DateTime
   WaterML      Int
-  WalkingTime  DateTime @db.Time
+  WalkingTime  Int
   WalkingSteps Int
-  Excercise    DateTime @db.Time
+  Excercise    Int
   patient      patients @relation(fields: [PatientID], references: [PatientID])
 }
 

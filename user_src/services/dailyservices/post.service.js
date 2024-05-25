@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 const dailyProgress = async (req, res, next) => {
     try {
-        const now = new Date().setHours(0, 0, 0, 0);
+        const now = new Date();
         const dateString = now.toISOString();
         const entry = await prisma.dailyProgress.create({
               where: {
@@ -16,7 +16,7 @@ const dailyProgress = async (req, res, next) => {
                 ProgressDate: dateString,
                 PatientID: +req.params.id,
                 WaterML: 0,
-                WalkingTime : 0,
+                WalkingTime : '00:00:00',
                 WalkingSteps: 0,
                 Excercise: 0
             }
