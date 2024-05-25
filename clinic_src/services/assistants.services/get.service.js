@@ -8,12 +8,14 @@ const getAllAssistants = async (req, res, next) => {
     try {
         const assistants = await prisma.assistant.findMany({});
         const dataWithImages = assistants.map(doctor => {
-            const imagePath = doctor.image_path;
-            const imageData = fs.readFileSync(imagePath, 'base64');
-            return {
-                ...doctor,
-                image_base64: imageData,
-            };
+            if (doctor.image_path !== "undefined image") {
+                const imagePath = doctor.image_path;
+                const imageData = fs.readFileSync(imagePath, 'base64');
+                return {
+                    ...doctor,
+                    image_base64: imageData,
+                };
+            }
         });
         return responses.success(res, "All assistants fetched!", dataWithImages);
     } catch (error) {

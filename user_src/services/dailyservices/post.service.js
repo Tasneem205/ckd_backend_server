@@ -6,13 +6,14 @@ const prisma = new PrismaClient();
 
 const dailyProgress = async (req, res, next) => {
     try {
-        const now = new Date().toISOString();
+        const now = new Date().setHours(0, 0, 0, 0);
+        const dateString = now.toISOString();
         const entry = await prisma.dailyProgress.create({
               where: {
                 PatientID: +req.params.id,
             },
             data: {
-                ProgressDate: now,
+                ProgressDate: dateString,
                 PatientID: +req.params.id,
                 WaterML: 0,
                 WalkingTime : 0,
@@ -20,7 +21,7 @@ const dailyProgress = async (req, res, next) => {
                 Excercise: 0
             }
           });
-          return responses.success(res, "entry added successfully", entry);
+          return responses.success(res, "a new entry added successfully", entry);
     } catch (error) {
         console.log(error);
         next();
