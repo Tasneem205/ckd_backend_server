@@ -16,7 +16,7 @@ assistantRouter.get("/:id", getFunctions.getAssistantWithId);
 assistantRouter.post(
     "/",
     // isAdmin,
-    upload('../assets/profile_images').single("file"),
+    upload('/assets/profile_images').single("file"),
     postFunctions.addAssistant
 );
 
@@ -27,7 +27,7 @@ assistantRouter.delete(
 
 assistantRouter.put(
     "/",
-    upload('../assets/profile_images').single("file"),
+    upload('/assets/profile_images').single("file"),
     updateAssistant
 );
 

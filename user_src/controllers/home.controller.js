@@ -15,7 +15,7 @@ homeRouter.get("/refreshToken", getFunctions.refreshToken);
 homeRouter.get("/logout", getFunctions.logout);
 
 homeRouter.put("/edit_profile/:id",
-    uploader('../assets/profile_images').single("file"),
+    uploader('/assets/profile_images').single("file"),
     updateProfile);
 
 export default homeRouter;

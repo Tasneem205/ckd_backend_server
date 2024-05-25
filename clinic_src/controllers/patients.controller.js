@@ -13,7 +13,7 @@ patientRouter.get("/:id", getFunctions.getPatientProfile);
 
 patientRouter.post(
     "/",
-    upload('../assets/profile_images').single('file'),
+    upload('/assets/profile_images').single('file'),
     addPatient
 );
 
@@ -21,7 +21,7 @@ patientRouter.delete("/:id", deletePatient);
 
 patientRouter.put(
     "/:id",
-    upload('../assets/profile_images').single('file'),
+    upload('/assets/profile_images').single('file'),
     updatePatient
 );
 
