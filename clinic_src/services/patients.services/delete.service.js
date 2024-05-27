@@ -8,10 +8,10 @@ const deletePatient = async (req, res, next) => {
     try {
         const id = req.params.id;
         const deletedPatient = await prisma.patients.delete({
-            where: { patientID: id }
+            where: { PatientID: +id }
         });
-        if (deletedPatient.image_path !== "undefined images") {
-            fs.unlink(user.image_path, (err) => {
+        if ("undefined image" != deletedPatient.image_path) {
+            fs.unlink(deletedPatient.image_path, (err) => {
                 if (err) {
                     console.error('Error deleting file:', err);
                     return;
