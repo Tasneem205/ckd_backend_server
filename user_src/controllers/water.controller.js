@@ -4,6 +4,6 @@ import updatewater from '../services/water.services/put.service.js';
 import allWater from '../services/water.services/get.service.js';
 
 waterRouter.get("/:id", allWater);
-waterRouter.put("/", updatewater);
+waterRouter.put("/:id", updatewater);
 
 export default waterRouter;
