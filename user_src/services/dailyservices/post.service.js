@@ -9,14 +9,11 @@ const dailyProgress = async (req, res, next) => {
         const now = new Date();
         const dateString = now.toISOString();
         const entry = await prisma.dailyProgress.create({
-              where: {
-                PatientID: +req.params.id,
-            },
             data: {
                 ProgressDate: dateString,
                 PatientID: +req.params.id,
                 WaterML: 0,
-                WalkingTime : '00:00:00',
+                WalkingTime : 0,
                 WalkingSteps: 0,
                 Excercise: 0
             }

@@ -15,10 +15,9 @@ const addPatient = async (req, res, next) => {
         const { FirstName, LastName, DateOfBirth, Gender, Email, DoctorID,
             Job, bloodGroup, height ,weight, assistantID, Phone} = value;
         const hashedPass = bcrypt.hashSync((value.FirstName + "_" + value.LastName), parseInt(process.env.SALT));
-        const date = new Date()
+        const now = new Date();
+        const formattedDate = now.toISOString();
         const dateOfBirth = new Date(DateOfBirth);
-        console.log(dateOfBirth);
-        console.log(date);
         const newPatient = await prisma.patients.create({
             data: {
                 FirstName: FirstName,
@@ -34,7 +33,7 @@ const addPatient = async (req, res, next) => {
                 assistantID: assistantID,
                 Phone: Phone,
                 Password: hashedPass,
-                registrationDate: date.toISOString(),
+                registrationDate: formattedDate,
                 image_path: req.file ? req.file.path : "undefined image"
             }
         });

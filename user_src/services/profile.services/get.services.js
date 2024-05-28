@@ -13,8 +13,8 @@ const profile = async (req, res, next) => {
         });
         if (!patient) return  responses.notFound(res, "User not found");
         let image = "";
-        // if (patient.imagePath !== "undefined image")
-            // image = fs.readFileSync(patient.imagePath, 'base64');
+        if (patient.imagePath !== "undefined image")
+            image = fs.readFileSync(patient.image_path, 'base64');
         const pressure = await prisma.pressure.findFirst({
             where: { PatientID: id }
         });

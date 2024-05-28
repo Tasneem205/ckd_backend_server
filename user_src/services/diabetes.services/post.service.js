@@ -9,7 +9,6 @@ const addDiabetes = async (req, res, next) => {
     try {
         const { error, value } = diabetesSchema.validate(req.body);
         if (error) return responses.badRequest(res, error.details[0].message);
-        console.log("id = ", req.params.id);
         const { diabetes_value } = value;
         const now = new Date();
         const formattedDate = now.toISOString();

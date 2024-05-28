@@ -10,7 +10,10 @@ const allWater = async (req, res, next) => {
             where: {
                 PatientID: +req.params.id,
             },
-            select:{ WaterML:true}
+            select:{
+                WaterML: true,
+                ProgressDate: true
+            }
         });
         return responses.success(res, "Total amount of Water", water);
     } catch (error) {
