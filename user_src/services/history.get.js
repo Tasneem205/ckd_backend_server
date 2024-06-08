@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import responses from "../helpers/responses.js";
 
 const prisma = new PrismaClient();
-
 const history = async (req, res, next) => {
     try {
         const Diabetes = await prisma.diabetes.findMany({
@@ -49,7 +48,7 @@ const history = async (req, res, next) => {
         const walkingTime_values = [];
         for (let i = 0; i < walking.length; i++) {
             walkingSteps_values.push(walking[i].WalkingSteps);
-            walkingTime_values.push(walking[i].walkingTime);
+            walkingTime_values.push(walking[i].WalkingTime);
         }
         const data = {
             diabetes_values,

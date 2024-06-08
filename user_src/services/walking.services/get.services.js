@@ -9,7 +9,7 @@ const AllWalking = async (req, res, next) => {
             where: {
                 PatientID: +req.params.id,
             },
-            select:{ WalkingSteps:true, WalkingTime:true}
+            select:{ ProgressDate:true, WalkingSteps:true, WalkingTime:true}
         });
         return responses.success(res, "Total steps", walking);
     } catch (error) {

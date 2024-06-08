@@ -1,10 +1,10 @@
 import { Router} from "express";
 const exerciseRouter = new Router();
 
-import Allexercise from "../services/exercise.services/get.services.js";
+import allExercise from "../services/exercise.services/get.services.js";
 import updateExercise from "../services/exercise.services/put.services.js";
 
-exerciseRouter.get("/",Allexercise);
-exerciseRouter.put("/", updateExercise);
+exerciseRouter.get("/", allExercise);
+exerciseRouter.put("/:id", updateExercise);
 
 export default exerciseRouter;
