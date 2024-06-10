@@ -5,32 +5,27 @@ const prisma = new PrismaClient();
 
 const homepage = async (req, res, next) => {
     try {
-        const walking = await prisma.dailyProgress.findMany({
-            where: {
-                PatientID: +req.params.id,
-            },
-            select:{ WalkingSteps:true, WalkingTime:true}
+        const today = await prisma.dailyProgress.findFirst({
+            where: { PatientID: +req.params.id },
+            orderBy: {ProgressDate: 'desc'}
         });
-        console.log(walking);
-        const water = await prisma.dailyProgress.findMany({
-            where: {
-                PatientID: +req.params.id,
-            },
-            select:{ WaterML:true}
+        const workoutWeek = await prisma.dailyProgress.findMany({
+            where: { PatientID: +req.params.id },
+            orderBy: { ProgressDate: 'desc' },
+            select:{ Excercise:true}
         });
-        const exercise = await prisma.dailyProgress.findMany({
-            where: {
-                PatientID: +req.params.id,
-            },
-            select: { Excercise:true }
-        });
-
+        console.log(workoutWeek);
+        let sum = 0
+        for (let i = 0; i < Math.min(7, workoutWeek.length); i++)
+            sum += workoutWeek[i].Excercise;
+        console.log(sum);
+        let workoutHours = String(Math.floor(sum / 60)).padStart(2, '0');
+        let workoutMinutes = String(sum % 60).padStart(2, '0');
+        let workoutThisWeek = workoutHours + ":" + workoutMinutes
         const homeData = {
-            walking,
-            water,
-            exercise
+            today,
+            workoutThisWeek
         }
-
         return responses.success(res, "Success for home", homeData);
     } catch (error) {
         console.log(error);
